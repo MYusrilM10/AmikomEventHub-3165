@@ -96,7 +96,7 @@
                     <i class="fa-solid fa-print w-5 h-5"></i>
                     Cetak / Simpan PDF
                 </button>
-                <a href="index.html"
+                <a href="{{ route('home') }}"
                     class="block text-center mt-4 text-slate-500 font-bold hover:text-indigo-600 flex items-center justify-center gap-2">
                     <i class="fa-solid fa-home w-5 h-5"></i>
                     Kembali ke Beranda</a>
