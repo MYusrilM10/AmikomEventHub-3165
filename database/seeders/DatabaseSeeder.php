@@ -15,6 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Panggil seeder lainnya
+        $this->call([
+            PartnerSeeder::class,
+        ]);
+
         // User::factory(10)->create();
 
         \App\Models\User::create([
