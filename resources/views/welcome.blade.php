@@ -126,4 +126,115 @@
             @endforeach
         </div>
     </section>
+
+    <!-- Partners Section -->
+    @if($partners->count() > 0)
+        <section class="max-w-7xl mx-auto px-6 py-24">
+            <!-- Decorative background elements -->
+            <div class="absolute left-0 top-1/2 -z-10 w-96 h-96 bg-indigo-100 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
+            <div class="absolute right-0 top-1/3 -z-10 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-4000"></div>
+
+            <!-- Section Header -->
+            <div class="mb-16 text-center">
+                <div class="inline-block mb-4">
+                    <span class="inline-flex items-center px-4 py-2 bg-indigo-50 text-indigo-600 rounded-full text-xs font-bold uppercase tracking-widest border border-indigo-100">
+                        <span class="w-2 h-2 bg-indigo-600 rounded-full mr-2"></span>
+                        Mitra Terpercaya
+                    </span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+                    Partner & Sponsor Kami
+                </h2>
+                <p class="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+                    Dipercaya oleh perusahaan dan organisasi terkemuka di seluruh Indonesia untuk menyelenggarakan event yang memorable
+                </p>
+            </div>
+
+            <!-- Partners Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
+                @foreach($partners as $partner)
+                    <div class="group relative h-32 lg:h-40 rounded-2xl overflow-hidden transition-all duration-500">
+                        <!-- Card Background -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-white via-white to-slate-50 border border-slate-100 rounded-2xl shadow-sm group-hover:shadow-2xl transition-all duration-500"></div>
+                        
+                        <!-- Hover Gradient Overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-indigo-50/0 to-purple-50/0 group-hover:from-indigo-50/50 group-hover:to-purple-50/50 rounded-2xl transition-all duration-500 pointer-events-none"></div>
+                        
+                        <!-- Border Animation -->
+                        <div class="absolute inset-0 rounded-2xl border border-transparent group-hover:border-indigo-200 transition-all duration-500"></div>
+
+                        <!-- Content -->
+                        <div class="relative h-full flex items-center justify-center p-6 lg:p-8">
+                            @if($partner->logo_url)
+                                <div class="flex items-center justify-center w-full h-full">
+                                    <img 
+                                        src="{{ $partner->logo_url }}" 
+                                        alt="{{ $partner->name }}"
+                                        class="max-h-24 max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110 drop-shadow-sm group-hover:drop-shadow-md"
+                                        title="{{ $partner->name }}"
+                                    >
+                                </div>
+                            @else
+                                <div class="text-center">
+                                    <div class="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-xl mb-2 group-hover:from-indigo-200 group-hover:to-purple-200 transition-colors duration-300">
+                                        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
+                                        </svg>
+                                    </div>
+                                    <p class="text-slate-700 font-bold text-sm group-hover:text-indigo-600 transition-colors duration-300">
+                                        {{ $partner->name }}
+                                    </p>
+                                </div>
+                            @endif
+                        </div>
+
+                        <!-- Shine Effect -->
+                        <div class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                            <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white to-transparent opacity-20 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none"></div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <!-- Bottom Accent -->
+            <div class="mt-16 flex items-center justify-center">
+                <div class="h-1 w-12 bg-gradient-to-r from-transparent to-indigo-400"></div>
+                <p class="mx-4 text-slate-400 text-sm font-medium">Bersama membangun ekosistem event yang lebih baik</p>
+                <div class="h-1 w-12 bg-gradient-to-l from-transparent to-indigo-400"></div>
+            </div>
+        </section>
+    @endif
+
+    <!-- Footer -->
+    <footer class="bg-indigo-900 text-indigo-100 py-20 px-6 mt-20">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="space-y-4 col-span-2">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-indigo-900 font-bold text-xl">
+                        AH
+                    </div>
+                    <span class="text-2xl font-bold text-white">AmikomEventHub</span>
+                </div>
+                <p class="max-w-xs text-indigo-300">Platform reservasi tiket event online terbaik untuk mahasiswa dan penyelenggara profesional.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-6">Navigasi</h4>
+                <ul class="space-y-4">
+                    <li><a href="#" class="hover:text-white transition">Home</a></li>
+                    <li><a href="#" class="hover:text-white transition">Semua Event</a></li>
+                    <li><a href="#" class="hover:text-white transition">Cara Bayar</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-6">Hubungi Kami</h4>
+                <ul class="space-y-4">
+                    <li>support@eventtiket.com</li>
+                    <li>+62 812 3456 7890</li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto pt-12 mt-12 border-t border-indigo-800 text-center text-indigo-400 text-sm">
+            &copy; 2024 AmikomEventHub. Built with Laravel & Tailwind CSS.
+        </div>
+    </footer>
 @endsection

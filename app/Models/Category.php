@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Category extends Model
 {
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = ['name', 'popularity', 'created_at'];
+
+    protected $dates = ['created_at', 'updated_at'];
 
     public function events()
     {

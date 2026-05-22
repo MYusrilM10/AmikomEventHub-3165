@@ -49,9 +49,26 @@ Route::prefix('admin')->name('admin.')->group(function () {
         return view('admin.transactions');
     })->name('transactions');
 
+    // CATEGORY ROUTES
     Route::get('/categories', [CategoryController::class, 'index'])
-        ->name('categories');
+        ->name('categories.index');
 
+    Route::get('/categories/create', [CategoryController::class, 'create'])
+        ->name('categories.create');
+
+    Route::post('/categories', [CategoryController::class, 'store'])
+        ->name('categories.store');
+
+    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])
+        ->name('categories.edit');
+
+    Route::put('/categories/{category}', [CategoryController::class, 'update'])
+        ->name('categories.update');
+
+    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])
+        ->name('categories.destroy');
+
+    // PARTNER ROUTES
     // READ
     Route::get('/partners', [PartnerController::class, 'index'])
         ->name('partners.index');

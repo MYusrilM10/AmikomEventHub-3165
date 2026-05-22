@@ -52,7 +52,37 @@
 
     @endif
 
-
+    <!-- Search Form -->
+    <div class="bg-white rounded-xl shadow-lg border border-gray-100 p-6 mb-6">
+        <form action="{{ route('admin.partners.index') }}" method="GET" class="flex gap-3">
+            <div class="flex-1">
+                <input 
+                    type="text" 
+                    name="search" 
+                    value="{{ request('search') }}"
+                    placeholder="Cari partner berdasarkan nama..."
+                    class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition"
+                >
+            </div>
+            <button 
+                type="submit" 
+                class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-lg font-semibold transition-all duration-300"
+            >
+                <svg class="w-5 h-5 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+                Cari
+            </button>
+            @if(request('search'))
+                <a 
+                    href="{{ route('admin.partners.index') }}" 
+                    class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-6 py-2.5 rounded-lg font-semibold transition-all duration-300"
+                >
+                    Reset
+                </a>
+            @endif
+        </form>
+    </div>
 
     <!-- Table Container -->
     <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
@@ -235,6 +265,13 @@
         </div>
 
     </div>
+
+    <!-- Pagination -->
+    @if($partners->hasPages())
+        <div class="mt-6">
+            {{ $partners->links() }}
+        </div>
+    @endif
 
 </div>
 

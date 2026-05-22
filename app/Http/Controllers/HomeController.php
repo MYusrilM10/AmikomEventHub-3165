@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Category;
+use App\Models\Partner;
 use Illuminate\Http\Request;
 
 
@@ -23,7 +24,8 @@ class HomeController extends Controller
         }
 
         $events = $query->get();
+        $partners = Partner::all();
 
-        return view('welcome', compact('events', 'categories'));
+        return view('welcome', compact('events', 'categories', 'partners'));
     }
 }

@@ -8,9 +8,16 @@ use App\Http\Controllers\Controller;
 
 class PartnerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $partners = Partner::all();
+        $query = Partner::query();
+
+        // Search functionality
+        if ($request->has('search') && $request->search != '') {
+            $query->where('name', 'LIKE', '%' . $request->search . '%');
+        }
+
+        $partners = $query->latest()->paginate(10);
 
         return view('admin.partners.index', compact('partners'));
     }
