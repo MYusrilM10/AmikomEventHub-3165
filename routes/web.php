@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\TransactionController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -19,78 +21,87 @@ Route::get('/checkout', [EventController::class, 'checkout'])->name('checkout');
 
 Route::get('/my-ticket', [TicketController::class, 'index'])->name('ticket');
 
+// Global login route for authentication middleware
+Route::redirect('/login', '/admin/login')->name('login');
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
+    Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 
-    Route::get('/', [DashboardController::class, 'index'])
-        ->name('dashboard');
+    Route::post('login', [AuthController::class, 'login'])->name('login.post');
 
-    Route::get('/events', [AdminEventController::class, 'index'])
-        ->name('events.index');
+    Route::middleware(['auth', 'admin'])->group(function () {
 
-    Route::get('/events/create', [AdminEventController::class, 'create'])
-        ->name('events.create');
+        Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::post('/events', [AdminEventController::class, 'store'])
-        ->name('events.store');
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/events/{event}/edit', [AdminEventController::class, 'edit'])
-        ->name('events.edit');
+        Route::get('/events', [AdminEventController::class, 'index'])
+            ->name('events.index');
 
-    Route::put('/events/{event}', [AdminEventController::class, 'update'])
-        ->name('events.update');
+        Route::get('/events/create', [AdminEventController::class, 'create'])
+            ->name('events.create');
 
-    Route::delete('/events/{event}', [AdminEventController::class, 'destroy'])
-        ->name('events.destroy');
+        Route::post('/events', [AdminEventController::class, 'store'])
+            ->name('events.store');
 
+        Route::get('/events/{event}/edit', [AdminEventController::class, 'edit'])
+            ->name('events.edit');
 
-    Route::get('/transactions', function () {
-        return view('admin.transactions');
-    })->name('transactions');
+        Route::put('/events/{event}', [AdminEventController::class, 'update'])
+            ->name('events.update');
 
-    // CATEGORY ROUTES
-    Route::get('/categories', [CategoryController::class, 'index'])
-        ->name('categories.index');
+        Route::delete('/events/{event}', [AdminEventController::class, 'destroy'])
+            ->name('events.destroy');
 
-    Route::get('/categories/create', [CategoryController::class, 'create'])
-        ->name('categories.create');
+        Route::get('/transactions', [TransactionController::class, 'index'])
+            ->name('transactions.index');
 
-    Route::post('/categories', [CategoryController::class, 'store'])
-        ->name('categories.store');
+        // CATEGORY ROUTES
+        Route::get('/categories', [CategoryController::class, 'index'])
+            ->name('categories.index');
 
-    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])
-        ->name('categories.edit');
+        Route::get('/categories/create', [CategoryController::class, 'create'])
+            ->name('categories.create');
 
-    Route::put('/categories/{category}', [CategoryController::class, 'update'])
-        ->name('categories.update');
+        Route::post('/categories', [CategoryController::class, 'store'])
+            ->name('categories.store');
 
-    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])
-        ->name('categories.destroy');
+        Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])
+            ->name('categories.edit');
 
-    // PARTNER ROUTES
-    // READ
-    Route::get('/partners', [PartnerController::class, 'index'])
-        ->name('partners.index');
+        Route::put('/categories/{category}', [CategoryController::class, 'update'])
+            ->name('categories.update');
 
-    // CREATE FORM
-    Route::get('/partners/create', [PartnerController::class, 'create'])
-        ->name('partners.create');
+        Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])
+            ->name('categories.destroy');
 
-    // STORE DATA
-    Route::post('/partners', [PartnerController::class, 'store'])
-        ->name('partners.store');
+        // PARTNER ROUTES
+        // READ
+        Route::get('/partners', [PartnerController::class, 'index'])
+            ->name('partners.index');
 
-    // EDIT FORM
-    Route::get('/partners/{partner}/edit', [PartnerController::class, 'edit'])
-        ->name('partners.edit');
+        // CREATE FORM
+        Route::get('/partners/create', [PartnerController::class, 'create'])
+            ->name('partners.create');
 
-    // UPDATE DATA
-    Route::put('/partners/{partner}', [PartnerController::class, 'update'])
-        ->name('partners.update');
+        // STORE DATA
+        Route::post('/partners', [PartnerController::class, 'store'])
+            ->name('partners.store');
 
-    // DELETE DATA
-    Route::delete('/partners/{partner}', [PartnerController::class, 'destroy'])
-        ->name('partners.destroy');
+        // EDIT FORM
+        Route::get('/partners/{partner}/edit', [PartnerController::class, 'edit'])
+            ->name('partners.edit');
+
+        // UPDATE DATA
+        Route::put('/partners/{partner}', [PartnerController::class, 'update'])
+            ->name('partners.update');
+
+        // DELETE DATA
+        Route::delete('/partners/{partner}', [PartnerController::class, 'destroy'])
+            ->name('partners.destroy');
+
+    });
 
 });

@@ -97,31 +97,39 @@
 </div>
 
 <script>
-    // Preview logo ketika URL diisi
+    // Real-time preview logo saat URL diisi
     const logoInput = document.getElementById('logo_url');
     const previewDiv = document.getElementById('logoPreview');
     const previewImage = document.getElementById('previewImage');
 
-    logoInput.addEventListener('change', function() {
-        if (this.value) {
-            previewImage.src = this.value;
-            previewImage.onload = function() {
-                previewDiv.style.display = 'block';
-            };
+    // Function untuk update preview
+    function updatePreview() {
+        const url = logoInput.value.trim();
+        
+        if (url) {
+            previewImage.src = url;
+            // Tampilkan preview container
+            previewDiv.style.display = 'block';
+            
+            // Handle error jika URL tidak valid
             previewImage.onerror = function() {
-                previewDiv.style.display = 'none';
+                // Jangan sembunyikan, biarkan user lihat error handling
+                console.warn('Gagal memuat gambar dari URL:', url);
             };
         } else {
             previewDiv.style.display = 'none';
         }
-    });
+    }
+
+    // Trigger on 'input' event untuk real-time preview saat user mengetik
+    logoInput.addEventListener('input', updatePreview);
+
+    // Juga handle 'change' event untuk jaga-jaga
+    logoInput.addEventListener('change', updatePreview);
 
     // Load preview jika ada value awal
     if (logoInput.value) {
-        previewImage.src = logoInput.value;
-        previewImage.onload = function() {
-            previewDiv.style.display = 'block';
-        };
+        updatePreview();
     }
 </script>
 @endsection

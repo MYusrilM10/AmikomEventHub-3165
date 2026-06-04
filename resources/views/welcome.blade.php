@@ -129,31 +129,31 @@
 
     <!-- Partners Section -->
     @if($partners->count() > 0)
-        <section class="max-w-7xl mx-auto px-6 py-24">
+        <section class="max-w-7xl mx-auto px-6 py-16">
             <!-- Decorative background elements -->
             <div class="absolute left-0 top-1/2 -z-10 w-96 h-96 bg-indigo-100 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
             <div class="absolute right-0 top-1/3 -z-10 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-4000"></div>
 
             <!-- Section Header -->
-            <div class="mb-16 text-center">
-                <div class="inline-block mb-4">
-                    <span class="inline-flex items-center px-4 py-2 bg-indigo-50 text-indigo-600 rounded-full text-xs font-bold uppercase tracking-widest border border-indigo-100">
+            <div class="mb-10 text-center">
+                <div class="inline-block mb-3">
+                    <span class="inline-flex items-center px-3 py-1.5 bg-indigo-50 text-indigo-600 rounded-full text-xs font-bold uppercase tracking-widest border border-indigo-100">
                         <span class="w-2 h-2 bg-indigo-600 rounded-full mr-2"></span>
                         Mitra Terpercaya
                     </span>
                 </div>
-                <h2 class="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+                <h2 class="text-2xl md:text-3xl font-black mb-2 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
                     Partner & Sponsor Kami
                 </h2>
-                <p class="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+                <p class="text-sm text-slate-500 max-w-2xl mx-auto leading-relaxed">
                     Dipercaya oleh perusahaan dan organisasi terkemuka di seluruh Indonesia untuk menyelenggarakan event yang memorable
                 </p>
             </div>
 
             <!-- Partners Grid -->
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
                 @foreach($partners as $partner)
-                    <div class="group relative h-32 lg:h-40 rounded-2xl overflow-hidden transition-all duration-500">
+                    <div class="group relative h-24 lg:h-32 rounded-2xl overflow-hidden transition-all duration-500">
                         <!-- Card Background -->
                         <div class="absolute inset-0 bg-gradient-to-br from-white via-white to-slate-50 border border-slate-100 rounded-2xl shadow-sm group-hover:shadow-2xl transition-all duration-500"></div>
                         
@@ -164,13 +164,13 @@
                         <div class="absolute inset-0 rounded-2xl border border-transparent group-hover:border-indigo-200 transition-all duration-500"></div>
 
                         <!-- Content -->
-                        <div class="relative h-full flex items-center justify-center p-6 lg:p-8">
+                        <div class="relative h-full flex items-center justify-center p-4 lg:p-6">
                             @if($partner->logo_url)
                                 <div class="flex items-center justify-center w-full h-full">
                                     <img 
                                         src="{{ $partner->logo_url }}" 
                                         alt="{{ $partner->name }}"
-                                        class="max-h-24 max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110 drop-shadow-sm group-hover:drop-shadow-md"
+                                        class="max-h-16 max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110 drop-shadow-sm group-hover:drop-shadow-md"
                                         title="{{ $partner->name }}"
                                     >
                                 </div>
@@ -181,7 +181,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
                                         </svg>
                                     </div>
-                                    <p class="text-slate-700 font-bold text-sm group-hover:text-indigo-600 transition-colors duration-300">
+                                    <p class="text-slate-700 font-bold text-xs group-hover:text-indigo-600 transition-colors duration-300">
                                         {{ $partner->name }}
                                     </p>
                                 </div>
@@ -197,7 +197,7 @@
             </div>
 
             <!-- Bottom Accent -->
-            <div class="mt-16 flex items-center justify-center">
+            <div class="mt-12 flex items-center justify-center">
                 <div class="h-1 w-12 bg-gradient-to-r from-transparent to-indigo-400"></div>
                 <p class="mx-4 text-slate-400 text-sm font-medium">Bersama membangun ekosistem event yang lebih baik</p>
                 <div class="h-1 w-12 bg-gradient-to-l from-transparent to-indigo-400"></div>
