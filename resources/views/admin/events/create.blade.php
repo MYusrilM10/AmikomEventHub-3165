@@ -33,7 +33,10 @@
             </div>
             <div>
                 <label class="block mb-2 font-medium text-gray-700">Harga Tiket (Rp)</label>
-                <input type="number" name="price" class="w-full border border-gray-300 p-2.5 rounded" required>
+                <input type="number" name="price" class="w-full border border-gray-300 p-2.5 rounded @error('price') border-red-500 @enderror" required>
+                @error('price')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
             <div>
                 <label class="block mb-2 font-medium text-gray-700">Kapasitas Stok</label>

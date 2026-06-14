@@ -47,6 +47,10 @@ class EventController extends Controller
             'price' => 'required|numeric|min:0',
             'stock' => 'required|numeric|min:1',
             'poster' => 'nullable|image|max:2048' // Maksimal 2MB
+        ], [
+            'price.min' => 'Harga tiket tidak boleh kurang dari 0.',
+            'price.numeric' => 'Harga tiket harus berupa angka.',
+            'stock.min' => 'Kapasitas stok minimal adalah 1.',
         ]);
 
         if ($request->hasFile('poster')) {
@@ -85,6 +89,10 @@ class EventController extends Controller
             'location' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
             'stock' => 'required|numeric|min:1',
+        ], [
+            'price.min' => 'Harga tiket tidak boleh kurang dari 0.',
+            'price.numeric' => 'Harga tiket harus berupa angka.',
+            'stock.min' => 'Kapasitas stok minimal adalah 1.',
         ]);
 
         if ($request->hasFile('poster')) {

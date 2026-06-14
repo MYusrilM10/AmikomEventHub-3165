@@ -17,7 +17,6 @@
             <label class="block mb-2 font-medium text-gray-700">Kategori Event</label>
             <select name="category_id" class="w-full border border-gray-300 p-2.5 rounded" required>
                 @foreach($categories as $category)
-                    <!-- Teknik logika kondisional (Ternary) memastikan pemilihan menu default merujuk pada kategori sebelumnya -->
                     <option value="{{ $category->id }}" {{ $event->category_id == $category->id ? 'selected' : '' }}>
                         {{ $category->name }}
                     </option>
@@ -37,7 +36,10 @@
             </div>
             <div>
                 <label class="block mb-2 font-medium text-gray-700">Rencana Harga Masuk (Rp)</label>
-                <input type="number" name="price" value="{{ $event->price }}" class="w-full border border-gray-300 p-2.5 rounded" required>
+                <input type="number" name="price" value="{{ $event->price }}" class="w-full border border-gray-300 p-2.5 rounded @error('price') border-red-500 @enderror" required>
+                @error('price')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
             <div>
                 <label class="block mb-2 font-medium text-gray-700">Kapasitas Stok Kuota</label>
