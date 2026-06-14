@@ -105,3 +105,5 @@ class DatabaseSeeder extends Seeder
                 'poster_path' => 'posters/event-6.png',
             ]);
         }
+    }
+}    

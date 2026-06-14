@@ -15,7 +15,7 @@ use App\Http\Controllers\Admin\TransactionController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/event/1', [EventController::class, 'show'])->name('events.show');
+Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
 
 Route::get('/checkout', [EventController::class, 'checkout'])->name('checkout');
 
@@ -35,7 +35,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::get('/events', [AdminEventController::class, 'index'])
             ->name('events.index');

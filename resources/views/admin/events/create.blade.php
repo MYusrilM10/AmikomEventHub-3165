@@ -4,7 +4,7 @@
 <div class="p-6 max-w-4xl mx-auto">
     <h2 class="text-2xl font-bold mb-6 text-gray-800">Form Tambah Event</h2>
 
-    <form action="{{ route('admin.events.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mt-2">
+    <form action="{{ route('admin.events.store') }}" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mt-2">
         @csrf
 
         <div class="mb-4">
@@ -44,6 +44,11 @@
         <div class="mb-6">
             <label class="block mb-2 font-medium text-gray-700">Lokasi / Gedung</label>
             <input type="text" name="location" class="w-full border border-gray-300 p-2.5 rounded" required>
+        </div>
+
+        <div class="mb-6">
+            <label class="block mb-2 font-medium text-gray-700">Poster Event</label>
+            <input type="file" name="poster" accept="image/*" class="w-full border border-gray-300 p-2.5 rounded">
         </div>
 
         <div class="flex justify-end border-t pt-4">

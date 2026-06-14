@@ -56,6 +56,7 @@
             <table class="w-full">
                 <thead>
                     <tr class="bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
+                        <th class="px-6 py-4 text-left text-sm font-bold text-gray-700 uppercase tracking-wider">Poster</th>
                         <th class="px-6 py-4 text-left text-sm font-bold text-gray-700 uppercase tracking-wider">Judul Event</th>
                         <th class="px-6 py-4 text-left text-sm font-bold text-gray-700 uppercase tracking-wider">Kategori</th>
                         <th class="px-6 py-4 text-left text-sm font-bold text-gray-700 uppercase tracking-wider">Tanggal & Waktu</th>
@@ -67,6 +68,9 @@
                 <tbody class="divide-y divide-gray-200">
                     @forelse($events as $event)
                         <tr class="hover:bg-gradient-to-r hover:from-indigo-50 hover:to-blue-50 transition-colors duration-200 group">
+                            <td class="px-6 py-4">
+                                <img src="{{ ($event->poster_path && Storage::disk('public')->exists($event->poster_path)) ? asset('storage/' . $event->poster_path) : 'https://placehold.co/64x80' }}" class="w-16 h-20 rounded-xl object-cover shadow-sm" alt="Poster {{ $event->title }}">
+                            </td>
                             <td class="px-6 py-4">
                                 <div class="font-semibold text-gray-800 group-hover:text-indigo-600 transition">{{ $event->title }}</div>
                                 <p class="text-sm text-gray-500 mt-1">{{ Str::limit($event->description, 50) }}</p>
@@ -105,7 +109,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-6 py-12 text-center">
+                            <td colspan="7" class="px-6 py-12 text-center">
                                 <div class="flex flex-col items-center justify-center">
                                     <svg class="w-16 h-16 text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
                                     <p class="text-gray-500 font-medium text-lg">
