@@ -1,9 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
+<div class="p-8 bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
 
 <!-- Header -->
-<header class="flex justify-between items-center mb-6">
+<header class="flex justify-between items-center mb-10">
     <div>
         <h1 class="text-3xl font-black">Dashboard Ringkasan</h1>
         <p class="text-slate-500 font-medium">Selamat datang kembali, Admin!</p>
@@ -130,6 +131,8 @@
             </tbody>
         </table>
     </div>
+</div>
+
 </div>
 
 @endsection

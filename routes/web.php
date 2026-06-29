@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\CheckoutController;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
@@ -18,6 +19,12 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
 
 Route::get('/checkout', [EventController::class, 'checkout'])->name('checkout');
+
+Route::get('/checkout/{event}', [CheckoutController::class, 'create'])
+    ->name('checkout.create');
+
+Route::post('/checkout/{event}', [CheckoutController::class, 'store'])
+    ->name('checkout.store');
 
 Route::get('/my-ticket', [TicketController::class, 'index'])->name('ticket');
 
@@ -100,6 +107,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // DELETE DATA
         Route::delete('/partners/{partner}', [PartnerController::class, 'destroy'])
             ->name('partners.destroy');
+
+        Route::get('transactions', [\App\Http\Controllers\Admin\TransactionController::class, 'index'])
+            ->name('transactions.index');
 
     });
 

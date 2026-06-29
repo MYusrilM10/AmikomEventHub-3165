@@ -3,7 +3,7 @@
 @section('content')
     <main class="max-w-3xl mx-auto px-6 py-20">
         <div class="mb-12">
-            <a href="{{ route('events.show') }}" class="text-indigo-600 font-bold flex items-center gap-2 mb-6">
+            <a href="{{ route('events.show', $event->id) }}" class="text-indigo-600 font-bold flex items-center gap-2 mb-6">
                 <i class="fa-solid fa-chevron-left w-4 h-4"></i>
                 Kembali ke Event
             </a>
@@ -16,17 +16,17 @@
             <div class="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
                 <h3 class="text-xl font-bold mb-6 border-b pb-4">Pesanan Anda</h3>
                 <div class="flex gap-6 items-start">
-                    <img src="{{ asset('assets/concert.png') }}" alt="Event" class="w-24 h-24 rounded-2xl object-cover">
+                    <img src="{{ $event->poster_path ? asset('storage/' . $event->poster_path) : asset('assets/concert.png') }}" alt="{{ $event->title }}" class="w-24 h-24 rounded-2xl object-cover">
                     <div>
-                        <h4 class="font-extrabold text-lg">Jazz Night 2024: A Celebration</h4>
-                        <p class="text-slate-500">16 Nov 2024 • The Blue Note Lounge</p>
-                        <p class="text-indigo-600 font-bold mt-2">1 x Rp 150.000</p>
+                        <h4 class="font-extrabold text-lg">{{ $event->title }}</h4>
+                        <p class="text-slate-500">{{ \Carbon\Carbon::parse($event->date)->format('d M Y') }} • {{ $event->location }}</p>
+                        <p class="text-indigo-600 font-bold mt-2">1 x Rp {{ number_format($event->price, 0, ',', '.') }}</p>
                     </div>
                 </div>
                 <div class="mt-8 pt-6 border-t space-y-3">
                     <div class="flex justify-between text-slate-500">
                         <span>Harga Tiket</span>
-                        <span>Rp 150.000</span>
+                        <span>Rp {{ number_format($event->price, 0, ',', '.') }}</span>
                     </div>
                     <div class="flex justify-between text-slate-500">
                         <span>Biaya Layanan</span>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="flex justify-between text-2xl font-black mt-4 pt-4 border-t">
                         <span>Total Bayar</span>
-                        <span class="text-indigo-600">Rp 155.000</span>
+                        <span class="text-indigo-600">Rp {{ number_format($event->price + 5000, 0, ',', '.') }}</span>
                     </div>
                 </div>
             </div>
@@ -43,11 +43,12 @@
             <div class="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
                 <h3 class="text-xl font-bold mb-6 italic text-indigo-600 underline underline-offset-8"><i class="fa-solid fa-user-circle w-5 h-5"></i> Data Pemesan
                     (Tanpa Login)</h3>
-                <form class="space-y-6">
+                <form action="{{ route('checkout.store', $event->id) }}" method="POST" class="space-y-6">
+                    @csrf
                     <div>
                         <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide">Nama
                             Lengkap</label>
-                        <input type="text" placeholder="Masukkan nama sesuai identitas"
+                        <input type="text" name="customer_name" placeholder="Masukkan nama sesuai identitas"
                             class="w-full px-5 py-4 bg-white border-2 border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition font-medium"
                             required>
                     </div>
@@ -55,7 +56,7 @@
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide">Email
                                 Aktif</label>
-                            <input type="email" placeholder="contoh@gmail.com"
+                            <input type="email" name="customer_email" placeholder="contoh@gmail.com"
                                 class="w-full px-5 py-4 bg-white border-2 border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition font-medium"
                                 required>
                             <p class="text-[10px] text-slate-400 mt-2 font-bold uppercase tracking-tighter">*E-Ticket
@@ -64,13 +65,13 @@
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide">No.
                                 WhatsApp</label>
-                            <input type="tel" placeholder="08xxxxxxx"
+                            <input type="tel" name="customer_phone" placeholder="08xxxxxxx"
                                 class="w-full px-5 py-4 bg-white border-2 border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition font-medium"
                                 required>
                         </div>
                     </div>
 
-                    <button type="button" onclick="showMidtrans()"
+                    <button type="submit"
                         class="w-full py-5 bg-indigo-600 text-white rounded-2xl font-black text-xl shadow-xl shadow-indigo-200 hover:bg-indigo-700 active:scale-95 transition-all flex items-center justify-center gap-2">
                         <i class="fa-solid fa-credit-card w-5 h-5"></i>
                         Bayar Sekarang
