@@ -34,6 +34,9 @@ Route::get('/success/{order_id}', [CheckoutController::class, 'success'])
 
 Route::get('/my-ticket', [TicketController::class, 'index'])->name('ticket');
 
+Route::post('/midtrans/callback', [\App\Http\Controllers\MidtransWebhookController::class, 'handle']);
+    
+
 // Global login route for authentication middleware
 Route::redirect('/login', '/admin/login')->name('login');
 
