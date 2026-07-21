@@ -1,109 +1,108 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Ticket - AmikomEventHub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-    </style>
-</head>
-
-<body class="bg-indigo-600 text-white min-h-screen flex items-center justify-center p-6">
-
-    <div class="max-w-md w-full">
-        <!-- Success Banner -->
-        <div class="text-center mb-8">
-            <div
-                class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-white">
-                <i class="fa-solid fa-check w-10 h-10 text-white text-5xl"></i>
-            </div>
-            <h1 class="text-3xl font-black">Pembayaran Berhasil!</h1>
-            <p class="text-indigo-100 mt-2">Tiket Anda telah terbit dan siap digunakan.</p>
-        </div>
-
-        <!-- Ticket Card -->
-        <div class="bg-white text-slate-900 rounded-[2.5rem] overflow-hidden shadow-2xl relative">
-            <!-- Ticket Header -->
-            <div class="p-8 bg-indigo-50 border-b-4 border-dashed border-indigo-100 text-center relative">
-                <p class="text-indigo-600 font-bold uppercase tracking-widest text-xs mb-2">E-Ticket Resmi</p>
-                <h2 class="text-2xl font-black leading-tight">Jazz Night 2024: A Celebration</h2>
-
-                <!-- Ticket Side Cuts -->
-                <div class="absolute -left-4 -bottom-4 w-8 h-8 bg-indigo-600 rounded-full"></div>
-                <div class="absolute -right-4 -bottom-4 w-8 h-8 bg-indigo-600 rounded-full"></div>
-            </div>
-
-            <!-- Ticket Body -->
-            <div class="p-8 space-y-8">
-                <div class="grid grid-cols-2 gap-6">
-                    <div>
-                        <p class="text-slate-400 text-xs font-bold uppercase mb-1">Nama Pembeli</p>
-                        <p class="font-bold text-lg">Donni Prabowo</p>
-                    </div>
-                    <div>
-                        <p class="text-slate-400 text-xs font-bold uppercase mb-1">Tanggal & Waktu</p>
-                        <p class="font-bold text-lg">16 Nov, 19:30</p>
-                    </div>
-                    <div>
-                        <p class="text-slate-400 text-xs font-bold uppercase mb-1">Order ID</p>
-                        <p class="font-bold">TRX-99210</p>
-                    </div>
-                    <div>
-                        <p class="text-slate-400 text-xs font-bold uppercase mb-1">Lokasi</p>
-                        <p class="font-bold">Blue Note Lounge</p>
-                    </div>
-                </div>
-
-                <div class="bg-slate-100 p-6 rounded-3xl flex flex-col items-center">
-                    <p class="text-slate-400 text-xs font-bold uppercase mb-4">Scan QR untuk Check-in</p>
-                    <!-- Mock QR Code -->
-                    <div class="w-48 h-48 bg-white p-4 rounded-xl shadow-inner flex items-center justify-center">
-                        <div class="w-full h-full border-4 border-slate-900 flex flex-wrap p-1">
-                            <!-- Just some boxes for mock QR -->
-                            <div class="w-1/4 h-1/4 bg-slate-900"></div>
-                            <div class="w-1/4 h-1/4 bg-white"></div>
-                            <div class="w-1/4 h-1/4 bg-slate-900"></div>
-                            <div class="w-1/4 h-1/4 bg-white"></div>
-                            <div class="w-1/4 h-1/4 bg-white"></div>
-                            <div class="w-1/4 h-1/4 bg-slate-900"></div>
-                            <div class="w-1/4 h-1/4 bg-white"></div>
-                            <div class="w-1/4 h-1/4 bg-slate-900"></div>
-                            <div class="w-1/4 h-1/4 bg-slate-900"></div>
-                            <div class="w-1/4 h-1/4 bg-white"></div>
-                            <div class="w-1/4 h-1/4 bg-slate-900"></div>
-                            <div class="w-1/4 h-1/4 bg-white"></div>
-                            <div class="w-1/4 h-1/4 bg-white"></div>
-                            <div class="w-1/4 h-1/4 bg-slate-900"></div>
-                            <div class="w-1/4 h-1/4 bg-white"></div>
-                            <div class="w-1/4 h-1/4 bg-slate-900"></div>
-                        </div>
-                    </div>
-                    <p class="mt-4 font-mono font-bold text-slate-800">TKT-001293848</p>
-                </div>
-            </div>
-
-            <div class="px-8 pb-8">
-                <button onclick="window.print()"
-                    class="w-full py-4 bg-indigo-600 text-white rounded-2xl font-bold shadow-lg hover:bg-indigo-700 transition flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-print w-5 h-5"></i>
-                    Cetak / Simpan PDF
-                </button>
-                <a href="{{ route('home') }}"
-                    class="block text-center mt-4 text-slate-500 font-bold hover:text-indigo-600 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-home w-5 h-5"></i>
-                    Kembali ke Beranda</a>
-            </div>
-        </div>
+@section('content')
+<div class="container mx-auto px-4 py-12">
+    <div class="mb-8">
+        <h1 class="text-4xl font-bold text-gray-800 mb-2">Tiket Saya</h1>
+        <p class="text-gray-600">Kelola tiket acara Anda dan berikan review</p>
     </div>
 
-</body>
+    @if($transactions->count() > 0)
+        <div class="space-y-4">
+            @foreach($transactions as $transaction)
+                <div class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition overflow-hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-6 items-center">
+                        <!-- Event Info -->
+                        <div class="md:col-span-2">
+                            @if($transaction->event->poster_path)
+                                <img src="{{ asset('storage/' . $transaction->event->poster_path) }}" 
+                                     alt="{{ $transaction->event->title }}" 
+                                     class="w-16 h-20 object-cover rounded float-left mr-4">
+                            @endif
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-800 mb-1">{{ $transaction->event->title }}</h3>
+                                <p class="text-sm text-gray-600 mb-1">
+                                    <i class="fa-solid fa-calendar w-4 h-4"></i>
+                                    {{ \Carbon\Carbon::parse($transaction->event->date)->format('d M Y, H:i') }}
+                                </p>
+                                <p class="text-sm text-gray-600">
+                                    <i class="fa-solid fa-location-dot w-4 h-4"></i>
+                                    {{ $transaction->event->location }}
+                                </p>
+                            </div>
+                        </div>
 
-</html>
+                        <!-- Status -->
+                        <div class="text-center">
+                            <div class="inline-block px-3 py-1 rounded-full text-sm font-semibold
+                                @if($transaction->event_finished)
+                                    bg-green-100 text-green-800
+                                @else
+                                    bg-blue-100 text-blue-800
+                                @endif">
+                                @if($transaction->event_finished)
+                                    ✓ Acara Selesai
+                                @else
+                                    ⏱ Acara Berlangsung
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="flex gap-2 justify-end flex-wrap">
+                            <a href="{{ route('events.show', $transaction->event) }}" 
+                               class="px-4 py-2 bg-indigo-100 text-indigo-700 rounded-lg hover:bg-indigo-200 transition text-sm font-medium">
+                                Lihat Acara
+                            </a>
+
+                            @if($transaction->can_review)
+                                @if($transaction->has_review)
+                                    <a href="{{ route('reviews.edit', $transaction->review) }}" 
+                                       class="px-4 py-2 bg-orange-100 text-orange-700 rounded-lg hover:bg-orange-200 transition text-sm font-medium">
+                                        Edit Review
+                                    </a>
+                                @else
+                                    <a href="{{ route('reviews.create', $transaction->event) }}" 
+                                       class="px-4 py-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition text-sm font-medium">
+                                        ⭐ Beri Rating
+                                    </a>
+                                @endif
+                            @endif
+                        </div>
+                    </div>
+
+                    <!-- Review Preview -->
+                    @if($transaction->has_review)
+                        <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
+                            <p class="text-sm text-gray-600 mb-2"><strong>Review Anda:</strong></p>
+                            <div class="flex gap-2 items-center mb-2">
+                                <div class="flex gap-0.5">
+                                    @for($i = 1; $i <= 5; $i++)
+                                        <span class="{{ $i <= $transaction->review->rating ? 'text-yellow-400' : 'text-gray-300' }}">★</span>
+                                    @endfor
+                                </div>
+                                <span class="text-sm font-semibold">{{ $transaction->review->rating }}/5</span>
+                            </div>
+                            @if($transaction->review->title)
+                                <p class="text-sm font-semibold text-gray-800 mb-1">{{ $transaction->review->title }}</p>
+                            @endif
+                            @if($transaction->review->review_text)
+                                <p class="text-sm text-gray-700">{{ Str::limit($transaction->review->review_text, 100) }}</p>
+                            @endif
+                        </div>
+                    @endif
+                </div>
+            @endforeach
+        </div>
+    @else
+        <div class="bg-gray-50 rounded-lg p-12 text-center">
+            <div class="text-6xl mb-4">🎫</div>
+            <h2 class="text-2xl font-semibold text-gray-800 mb-2">Belum Ada Tiket</h2>
+            <p class="text-gray-600 mb-6">Anda belum membeli tiket apapun. Jelajahi acara menarik sekarang!</p>
+            <a href="{{ route('home') }}" class="inline-block px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition font-medium">
+                Jelajahi Acara
+            </a>
+        </div>
+    @endif
+</div>
+@endsection

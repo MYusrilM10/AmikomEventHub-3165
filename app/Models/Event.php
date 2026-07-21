@@ -15,10 +15,55 @@ class Event extends Model
         'price',
         'stock',
         'poster_path',
+        'average_rating',
+        'total_reviews',
     ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * Relationship: Event has many reviews
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    /**
+     * Get average rating for this event
+     */
+    public function getAverageRating()
+    {
+        return $this->average_rating ?? 0;
+    }
+
+    /**
+     * Get total reviews for this event
+     */
+    public function getTotalReviews()
+    {
+        return $this->total_reviews ?? 0;
+    }
+
+    /**
+     * Get verified purchase reviews only
+     */
+    public function verifiedReviews()
+    {
+        return $this->reviews()->where('is_verified_purchase', true);
+    }
+
+    /**
+     * Get reviews sorted by newest
+     */
+    public function getReviewsNewest()
+    {
+        return $this->reviews()
+            ->where('is_verified_purchase', true)
+            ->orderBy('created_at', 'desc')
+            ->get();
     }
 }

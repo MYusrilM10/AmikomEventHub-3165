@@ -25,6 +25,7 @@ class User extends Authenticatable
         'role',
         'google_id',
         'avatar',
+        'average_rating',
     ];
 
     /**
@@ -49,4 +50,41 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Relationship: User has many reviews
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    /**
+     * Get organizer events (through relationship)
+     */
+    public function events()
+    {
+        // Assuming user_id or organizer_id field in events table
+        // For now, this is a placeholder - adjust based on your actual structure
+        // If you add organizer_id to events table, use:
+        // return $this->hasMany(Event::class, 'organizer_id');
+        return $this->hasMany(Event::class);
+    }
+
+    /**
+     * Get average rating for this organizer
+     */
+    public function getAverageRating()
+    {
+        return $this->average_rating ?? 0;
+    }
+
+    /**
+     * Check if organizer is trusted (rating >= 4.5)
+     */
+    public function isTrustedOrganizer()
+    {
+        return $this->average_rating >= 4.5;
+    }
 }
+

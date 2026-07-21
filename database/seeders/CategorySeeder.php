@@ -17,33 +17,15 @@ class CategorySeeder extends Seeder
     {
         // Data kategori default
         $categories = [
-            [
-                'name' => 'Seminar',
-                'description' => 'Acara seminar dan presentasi ilmiah'
-            ],
-            [
-                'name' => 'Entertainment',
-                'description' => 'Acara hiburan dan pertunjukan seni'
-            ],
-            [
-                'name' => 'Workshop',
-                'description' => 'Acara workshop dan pelatihan hands-on'
-            ],
-            [
-                'name' => 'Conference',
-                'description' => 'Konferensi dan diskusi profesional'
-            ],
-            [
-                'name' => 'Sports',
-                'description' => 'Acara olahraga dan kompetisi'
-            ],
+            'Seminar',
+            'Entertainment',
+            'Workshop',
+            'Conference',
+            'Sports',
         ];
 
-        foreach ($categories as $category) {
-            Category::firstOrCreate(
-                ['name' => $category['name']],
-                ['description' => $category['description']]
-            );
+        foreach ($categories as $name) {
+            Category::firstOrCreate(['name' => $name]);
         }
     }
 }
