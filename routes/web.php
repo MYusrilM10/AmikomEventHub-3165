@@ -6,6 +6,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\SocialAuthController;
+use App\Http\Controllers\ReviewController;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
@@ -34,6 +35,17 @@ Route::get('/success/{order_id}', [CheckoutController::class, 'success'])
     ->name('checkout.success');
 
 Route::get('/my-ticket', [TicketController::class, 'index'])->name('ticket');
+
+// Review Routes
+Route::get('/events/{event}/reviews', [ReviewController::class, 'index'])->name('reviews.index');
+Route::get('/events/{event}/reviews/create', [ReviewController::class, 'create'])->name('reviews.create');
+Route::post('/events/{event}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
+Route::put('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
+Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+Route::get('/my-reviews', [ReviewController::class, 'myReviews'])->name('reviews.my');
+Route::get('/events/{event}/rating-stats', [ReviewController::class, 'getRatingStats'])->name('rating.stats');
+Route::get('/events/{event}/review-status', [ReviewController::class, 'getReviewStatus'])->name('review.status');
 
 Route::post('/midtrans/callback', [\App\Http\Controllers\MidtransWebhookController::class, 'handle']);
 

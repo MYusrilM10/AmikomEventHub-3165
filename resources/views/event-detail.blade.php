@@ -91,4 +91,30 @@
             </div>
         </div>
     </main>
+
+    <!-- Review Section -->
+    <section class="bg-gray-50 py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Ulasan & Penilaian</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Stats Sidebar -->
+                <div class="lg:col-span-1">
+                    @include('components.review-stats', ['event' => $event, 'averageRating' => $event->getAverageRating(), 'totalReviews' => $event->getTotalReviews()])
+                </div>
+
+                <!-- Reviews List -->
+                <div class="lg:col-span-2">
+                    @php
+                        $reviews = $event->reviews()
+                            ->where('is_verified_purchase', true)
+                            ->with('user')
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(5);
+                    @endphp
+                    @include('components.review-list', ['reviews' => $reviews])
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
