@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\SocialAuthController;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
@@ -35,7 +36,10 @@ Route::get('/success/{order_id}', [CheckoutController::class, 'success'])
 Route::get('/my-ticket', [TicketController::class, 'index'])->name('ticket');
 
 Route::post('/midtrans/callback', [\App\Http\Controllers\MidtransWebhookController::class, 'handle']);
-    
+
+// Google SSO (Laravel Socialite)
+Route::get('/auth/google',          [SocialAuthController::class, 'redirect'])->name('auth.google');
+Route::get('/auth/google/callback', [SocialAuthController::class, 'callback'])->name('auth.google.callback');
 
 // Global login route for authentication middleware
 Route::redirect('/login', '/admin/login')->name('login');
